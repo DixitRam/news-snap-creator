@@ -14,7 +14,7 @@ const Header = () => {
           />
           <div>
             <h1 className="text-2xl font-bold">Girnar Sandesh</h1>
-            <p className="text-sm">News Template Generator</p>
+            <p className="text-sm">News Post Generator - <i>Vibe coded by Dixi Ram</i></p>
           </div>
         </div>
         <div className="flex items-center gap-4">

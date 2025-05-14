@@ -249,7 +249,7 @@ const downloadTemplate = async () => {
           onClick={downloadTemplate} 
           className="w-full bg-red-600 hover:bg-red-700 text-white font-medium"
         >
-          <Download className="mr-2 h-4 w-4" /> Download Template
+          <Download className="mr-2 h-4 w-4" /> Download Image
         </Button>
       </CardFooter>
     </Card>
