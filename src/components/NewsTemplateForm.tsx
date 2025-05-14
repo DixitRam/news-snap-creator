@@ -24,7 +24,7 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
     setNewsData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSelectChange = (value: string) => {
+  const handleSelectChange = (value: "standard" | "event" | "announcement" | "police") => {
     setNewsData((prev) => ({ ...prev, templateType: value }));
   };
 

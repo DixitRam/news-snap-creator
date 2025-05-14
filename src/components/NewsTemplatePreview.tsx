@@ -80,9 +80,9 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
               <div className="flex items-center gap-2">
                 <div className="bg-white rounded-full h-12 w-12 flex items-center justify-center overflow-hidden">
                   <img 
-                    src="/logo-placeholder.png" 
+                    src="https://instagram.fjga1-1.fna.fbcdn.net/v/t51.2885-19/403908255_1677328472793460_3179481571731453175_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fjga1-1.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2QHOXjOM5N0ksqePGC4OzpMZdz4X2p8qPU6ncYdt-OXY-6oZQO9vvnOEYsflMfmpJ4NzpSd9ytZhWs4gPSSOuMs7&_nc_gid=dF1ffrwOHYCMsdHYAEBFag&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfLyk0ytsD3sifFOGnsCZTf6EaURrDgVSVELxldQjbFLWA&oe=6829FC0D&_nc_sid=8b3546" 
                     alt="Girnar Sandesh Logo" 
-                    className="h-10 w-10"
+                    className="h-10 w-10 object-cover"
                   />
                 </div>
                 <div>
