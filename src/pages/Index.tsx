@@ -1,11 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import NewsTemplateForm from "@/components/NewsTemplateForm";
+import NewsTemplatePreview from "@/components/NewsTemplatePreview";
+import Header from "@/components/Header";
+import { NewsData } from "@/types/newsTypes";
 
 const Index = () => {
+  const [newsData, setNewsData] = useState<NewsData>({
+    headline: "",
+    subheading: "",
+    content: "",
+    date: new Date().toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+    }),
+    images: [],
+    templateType: "standard",
+  });
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          <div className="lg:w-1/2">
+            <NewsTemplateForm newsData={newsData} setNewsData={setNewsData} />
+          </div>
+          <div className="lg:w-1/2">
+            <NewsTemplatePreview newsData={newsData} />
+          </div>
+        </div>
       </div>
     </div>
   );
