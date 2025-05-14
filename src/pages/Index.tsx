@@ -1,24 +1,24 @@
-
 import { useState } from "react";
 import NewsTemplateForm from "@/components/NewsTemplateForm";
 import NewsTemplatePreview from "@/components/NewsTemplatePreview";
 import Header from "@/components/Header";
 import { NewsData } from "@/types/newsTypes";
+import { format } from "date-fns";
 
 const Index = () => {
   const [newsData, setNewsData] = useState<NewsData>({
     headline: "",
+    headlineColor: "#000000",
+    headlineFontSize: "text-2xl", // Default font size
     subheading: "",
+    subheadingColor: "#000000",
+    subheadingFontSize: "text-lg", // Default font size
     content: "",
-    date: new Date().toLocaleDateString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-    }),
+    contentFontSize: "text-base", // Default font size
+    date: format(new Date(), "dd-MM-yy"),
     images: [],
     templateType: "standard",
-    headlineColor: "#000000",  // Default to black
-    subheadingColor: "#000000", // Default to black
+    reporterName: "જીતુ પરમાર માંગરોળ" // Default reporter name
   });
 
   return (

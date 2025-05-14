@@ -1,11 +1,14 @@
-
 export interface NewsData {
   headline: string;
-  subheading: string;
-  content: string;
-  date: string;
-  images: string[];
-  templateType: "standard" | "event" | "announcement" | "police";
   headlineColor: string;
+  headlineFontSize: string;
+  subheading: string;
   subheadingColor: string;
+  subheadingFontSize: string;
+  content: string;
+  contentFontSize: string;
+  date: string;
+  templateType: "standard" | "event" | "announcement" | "police";
+  images: string[];
+  reporterName: string;
 }

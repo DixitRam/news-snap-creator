@@ -1,4 +1,3 @@
-
 import { ChangeEvent } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Input } from "./ui/input";
@@ -118,6 +117,24 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
         </div>
         
         <div className="space-y-2">
+          <Label>Headline Font Size</Label>
+          <Select 
+            value={newsData.headlineFontSize} 
+            onValueChange={(value) => setNewsData(prev => ({...prev, headlineFontSize: value}))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select size" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="text-xl">Small</SelectItem>
+              <SelectItem value="text-2xl">Medium</SelectItem>
+              <SelectItem value="text-3xl">Large</SelectItem>
+              <SelectItem value="text-4xl">Extra Large</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="space-y-2">
           <Label htmlFor="subheading">Subheading</Label>
           <Input
             id="subheading"
@@ -158,6 +175,24 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
         </div>
         
         <div className="space-y-2">
+          <Label>Subheading Font Size</Label>
+          <Select 
+            value={newsData.subheadingFontSize} 
+            onValueChange={(value) => setNewsData(prev => ({...prev, subheadingFontSize: value}))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select size" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="text-sm">Small</SelectItem>
+              <SelectItem value="text-base">Medium</SelectItem>
+              <SelectItem value="text-lg">Large</SelectItem>
+              <SelectItem value="text-xl">Extra Large</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        <div className="space-y-2">
           <Label htmlFor="content">News Content</Label>
           <Textarea
             id="content"
@@ -167,6 +202,24 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
             value={newsData.content}
             onChange={handleInputChange}
           />
+        </div>
+        
+        <div className="space-y-2">
+          <Label>Content Font Size</Label>
+          <Select 
+            value={newsData.contentFontSize} 
+            onValueChange={(value) => setNewsData(prev => ({...prev, contentFontSize: value}))}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select size" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="text-xs">Extra Small</SelectItem>
+              <SelectItem value="text-sm">Small</SelectItem>
+              <SelectItem value="text-base">Medium</SelectItem>
+              <SelectItem value="text-lg">Large</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         
         <div className="space-y-2">
@@ -245,6 +298,17 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
               </div>
             ))}
           </div>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="reporterName">Reporter Name</Label>
+          <Input
+            id="reporterName"
+            name="reporterName"
+            placeholder="Enter reporter name"
+            value={newsData.reporterName}
+            onChange={handleInputChange}
+          />
         </div>
       </CardContent>
     </Card>
