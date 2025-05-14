@@ -122,7 +122,7 @@ const downloadTemplate = async () => {
           <div 
             ref={previewRef} 
             className={`border-4 rounded-lg overflow-hidden shadow-xl ${templateStyle.mainBg} ${templateStyle.borderColor} aspect-square flex flex-col`}
-              style={{ minHeight: "1080px", minWidth: "1080px", maxWidth: "100%" }}
+              style={{ width: "1080px", maxWidth: "100%" }}
           >
             {/* Header - reduced padding */}
             <div className={`bg-gradient-to-r ${templateStyle.headerBg} text-white p-1 flex justify-between items-center shadow-md`}>
