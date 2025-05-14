@@ -10,13 +10,27 @@ import { NewsData } from "@/types/newsTypes";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 interface NewsTemplateFormProps {
   newsData: NewsData;
   setNewsData: React.Dispatch<React.SetStateAction<NewsData>>;
 }
+
+// Predefined color options
+const textColorOptions = [
+  { value: "#000000", label: "Black", class: "bg-black" },
+  { value: "#FFFFFF", label: "White", class: "bg-white border border-gray-300" },
+  { value: "#FF0000", label: "Red", class: "bg-red-600" },
+  { value: "#0000FF", label: "Blue", class: "bg-blue-600" },
+  { value: "#006400", label: "Dark Green", class: "bg-green-800" },
+  { value: "#800000", label: "Maroon", class: "bg-red-900" },
+  { value: "#FFA500", label: "Orange", class: "bg-orange-500" },
+  { value: "#4B0082", label: "Indigo", class: "bg-indigo-900" },
+  { value: "#800080", label: "Purple", class: "bg-purple-800" },
+];
 
 const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -50,6 +64,13 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
     }
   };
 
+  const handleColorChange = (colorType: "headlineColor" | "subheadingColor", value: string) => {
+    setNewsData((prev) => ({
+      ...prev,
+      [colorType]: value
+    }));
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -68,6 +89,35 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
         </div>
         
         <div className="space-y-2">
+          <Label className="flex items-center gap-2">
+            <Palette className="h-4 w-4" /> Headline Color
+          </Label>
+          <div className="grid grid-cols-3 gap-2">
+            {textColorOptions.map((color) => (
+              <Button
+                key={color.value}
+                type="button"
+                variant="outline"
+                className={cn(
+                  "h-8 w-full border-2",
+                  newsData.headlineColor === color.value ? "ring-2 ring-primary" : ""
+                )}
+                onClick={() => handleColorChange("headlineColor", color.value)}
+              >
+                <span className={`h-4 w-4 rounded-full ${color.class}`} />
+                <span className="ml-2 text-xs">{color.label}</span>
+              </Button>
+            ))}
+            <Input
+              type="color"
+              value={newsData.headlineColor}
+              onChange={(e) => handleColorChange("headlineColor", e.target.value)}
+              className="h-8 cursor-pointer"
+            />
+          </div>
+        </div>
+        
+        <div className="space-y-2">
           <Label htmlFor="subheading">Subheading</Label>
           <Input
             id="subheading"
@@ -76,6 +126,35 @@ const NewsTemplateForm = ({ newsData, setNewsData }: NewsTemplateFormProps) => {
             value={newsData.subheading}
             onChange={handleInputChange}
           />
+        </div>
+        
+        <div className="space-y-2">
+          <Label className="flex items-center gap-2">
+            <Palette className="h-4 w-4" /> Subheading Color
+          </Label>
+          <div className="grid grid-cols-3 gap-2">
+            {textColorOptions.map((color) => (
+              <Button
+                key={color.value}
+                type="button"
+                variant="outline"
+                className={cn(
+                  "h-8 w-full border-2",
+                  newsData.subheadingColor === color.value ? "ring-2 ring-primary" : ""
+                )}
+                onClick={() => handleColorChange("subheadingColor", color.value)}
+              >
+                <span className={`h-4 w-4 rounded-full ${color.class}`} />
+                <span className="ml-2 text-xs">{color.label}</span>
+              </Button>
+            ))}
+            <Input
+              type="color"
+              value={newsData.subheadingColor}
+              onChange={(e) => handleColorChange("subheadingColor", e.target.value)}
+              className="h-8 cursor-pointer"
+            />
+          </div>
         </div>
         
         <div className="space-y-2">

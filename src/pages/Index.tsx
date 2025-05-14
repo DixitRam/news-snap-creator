@@ -17,6 +17,8 @@ const Index = () => {
     }),
     images: [],
     templateType: "standard",
+    headlineColor: "#000000",  // Default to black
+    subheadingColor: "#000000", // Default to black
   });
 
   return (

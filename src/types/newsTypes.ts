@@ -6,4 +6,6 @@ export interface NewsData {
   date: string;
   images: string[];
   templateType: "standard" | "event" | "announcement" | "police";
+  headlineColor: string;
+  subheadingColor: string;
 }

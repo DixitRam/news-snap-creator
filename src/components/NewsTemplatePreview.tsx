@@ -56,25 +56,29 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
         return {
           mainBg: "bg-yellow-50",
           borderColor: "border-yellow-500", 
-          headerBg: "from-amber-600 to-amber-700"
+          headerBg: "from-amber-600 to-amber-700",
+          stripBg: "bg-yellow-400"
         };
       case "announcement":
         return {
           mainBg: "bg-blue-50",
           borderColor: "border-blue-500",
-          headerBg: "from-blue-600 to-blue-700"
+          headerBg: "from-blue-600 to-blue-700",
+          stripBg: "bg-blue-400"
         };
       case "police":
         return {
           mainBg: "bg-gray-100",
           borderColor: "border-gray-700",
-          headerBg: "from-gray-700 to-gray-800"
+          headerBg: "from-gray-700 to-gray-800",
+          stripBg: "bg-gray-400"
         };
       default:
         return {
           mainBg: "bg-white",
           borderColor: "border-red-500",
-          headerBg: "from-red-600 to-red-700"
+          headerBg: "from-red-600 to-red-700",
+          stripBg: "bg-red-400"
         };
     }
   };
@@ -104,8 +108,12 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
                   />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold drop-shadow-sm">સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર</div>
-                  <div className="text-3xl font-bold drop-shadow-sm tracking-wide">ગિરનાર સંદેશ</div>
+                  <div className="text-xs font-semibold drop-shadow-sm" style={{ color: newsData.subheadingColor || 'white' }}>
+                    સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર
+                  </div>
+                  <div className="text-3xl font-bold drop-shadow-sm tracking-wide" style={{ color: newsData.headlineColor || 'white' }}>
+                    ગિરનાર સંદેશ
+                  </div>
                 </div>
               </div>
               <div className="text-sm font-medium drop-shadow-sm">
@@ -126,7 +134,15 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
             <div className="p-4 md:p-5">
               {/* Headline */}
               {newsData.headline && (
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center border-b-2 pb-2 border-gray-300">{newsData.headline}</h2>
+                <div className="mb-4 text-center">
+                  <h2 
+                    className="text-2xl md:text-3xl font-bold pb-2"
+                    style={{ color: newsData.headlineColor || 'black' }}
+                  >
+                    {newsData.headline}
+                  </h2>
+                  <div className={`h-1.5 mx-auto w-3/4 ${templateStyle.stripBg} rounded-sm`}></div>
+                </div>
               )}
               
               {/* Images */}
@@ -159,7 +175,12 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
               
               {/* Subheading */}
               {newsData.subheading && (
-                <h3 className="text-xl font-semibold mb-3 underline decoration-2 decoration-gray-400">{newsData.subheading}</h3>
+                <h3 
+                  className="text-xl font-semibold mb-3 underline decoration-2 decoration-gray-400"
+                  style={{ color: newsData.subheadingColor || 'black' }}
+                >
+                  {newsData.subheading}
+                </h3>
               )}
               
               {/* Content */}
