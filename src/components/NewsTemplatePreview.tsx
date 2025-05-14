@@ -53,66 +53,85 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
   const getTemplateStyle = () => {
     switch (newsData.templateType) {
       case "event":
-        return "bg-yellow-50 border-yellow-500";
+        return {
+          mainBg: "bg-yellow-50",
+          borderColor: "border-yellow-500", 
+          headerBg: "from-amber-600 to-amber-700"
+        };
       case "announcement":
-        return "bg-blue-50 border-blue-500";
+        return {
+          mainBg: "bg-blue-50",
+          borderColor: "border-blue-500",
+          headerBg: "from-blue-600 to-blue-700"
+        };
       case "police":
-        return "bg-gray-50 border-gray-500";
+        return {
+          mainBg: "bg-gray-100",
+          borderColor: "border-gray-700",
+          headerBg: "from-gray-700 to-gray-800"
+        };
       default:
-        return "bg-white border-red-500";
+        return {
+          mainBg: "bg-white",
+          borderColor: "border-red-500",
+          headerBg: "from-red-600 to-red-700"
+        };
     }
   };
 
+  const templateStyle = getTemplateStyle();
+
   return (
-    <Card>
-      <CardHeader>
+    <Card className="shadow-lg">
+      <CardHeader className="border-b bg-slate-50">
         <CardTitle>Preview</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="border rounded-md p-4 overflow-hidden bg-white">
+      <CardContent className="p-4 bg-gray-100">
+        <div className="border rounded-md p-4 overflow-hidden bg-white shadow-md">
           <div 
             ref={previewRef} 
-            className={`border-2 rounded overflow-hidden shadow-lg ${getTemplateStyle()}`}
+            className={`border-4 rounded-lg overflow-hidden shadow-xl ${templateStyle.mainBg} ${templateStyle.borderColor}`}
             style={{ width: "800px", maxWidth: "100%", height: "auto" }}
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white p-2 flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <div className="bg-white rounded-full h-12 w-12 flex items-center justify-center overflow-hidden">
+            <div className={`bg-gradient-to-r ${templateStyle.headerBg} text-white p-3 flex justify-between items-center shadow-md`}>
+              <div className="flex items-center gap-3">
+                <div className="bg-white rounded-full h-14 w-14 flex items-center justify-center overflow-hidden border-2 border-white shadow-md">
                   <img 
                     src="https://instagram.fjga1-1.fna.fbcdn.net/v/t51.2885-19/403908255_1677328472793460_3179481571731453175_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fjga1-1.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2QHOXjOM5N0ksqePGC4OzpMZdz4X2p8qPU6ncYdt-OXY-6oZQO9vvnOEYsflMfmpJ4NzpSd9ytZhWs4gPSSOuMs7&_nc_gid=dF1ffrwOHYCMsdHYAEBFag&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfLyk0ytsD3sifFOGnsCZTf6EaURrDgVSVELxldQjbFLWA&oe=6829FC0D&_nc_sid=8b3546" 
                     alt="Girnar Sandesh Logo" 
-                    className="h-10 w-10 object-cover"
+                    className="h-12 w-12 object-cover"
                   />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold">સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર</div>
-                  <div className="text-2xl font-bold">ગિરનાર સંદેશ</div>
+                  <div className="text-xs font-semibold drop-shadow-sm">સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર</div>
+                  <div className="text-3xl font-bold drop-shadow-sm tracking-wide">ગિરનાર સંદેશ</div>
                 </div>
               </div>
-              <div className="text-sm">
-                RNI NO.GUJGUJ/2023/86250 Date:- {newsData.date}
+              <div className="text-sm font-medium drop-shadow-sm">
+                <div>RNI NO.GUJGUJ/2023/86250</div>
+                <div>Date:- {newsData.date}</div>
               </div>
             </div>
             
             {/* Brown bar */}
-            <div className="bg-amber-800 text-white p-1 text-xs flex justify-between items-center">
-              <div>તંત્રી : મિલન એન.બારડ</div>
-              <div className="flex items-center">
-                <span className="mr-1">📱</span> 8000124324
+            <div className="bg-amber-900 text-white py-1.5 px-3 text-sm flex justify-between items-center shadow-sm">
+              <div className="font-medium">તંત્રી : મિલન એન.બારડ</div>
+              <div className="flex items-center gap-1">
+                <span className="text-base">📱</span> 8000124324
               </div>
             </div>
             
             {/* News Content */}
-            <div className="p-3">
+            <div className="p-4 md:p-5">
               {/* Headline */}
               {newsData.headline && (
-                <h2 className="text-2xl font-bold mb-3">{newsData.headline}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center border-b-2 pb-2 border-gray-300">{newsData.headline}</h2>
               )}
               
               {/* Images */}
               {newsData.images.length > 0 && (
-                <div className={`grid gap-2 mb-4 ${
+                <div className={`grid gap-3 mb-4 ${
                   newsData.images.length === 1 
                     ? 'grid-cols-1' 
                     : newsData.images.length === 2 
@@ -126,7 +145,7 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
                         newsData.images.length === 3 && index === 0 
                           ? 'col-span-2' 
                           : ''
-                      } h-48 overflow-hidden rounded`}
+                      } h-52 overflow-hidden rounded-lg border-2 ${templateStyle.borderColor} shadow-md`}
                     >
                       <img 
                         src={img} 
@@ -140,26 +159,26 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
               
               {/* Subheading */}
               {newsData.subheading && (
-                <h3 className="text-xl font-semibold mb-2">{newsData.subheading}</h3>
+                <h3 className="text-xl font-semibold mb-3 underline decoration-2 decoration-gray-400">{newsData.subheading}</h3>
               )}
               
               {/* Content */}
               {newsData.content && (
-                <p className="text-base leading-relaxed">{newsData.content}</p>
+                <p className="text-base leading-relaxed border-l-4 pl-3 py-1 border-gray-300">{newsData.content}</p>
               )}
               
               {/* Footer */}
-              <div className="text-sm text-right mt-6 text-red-600">
+              <div className="text-sm text-right mt-6 text-red-700 font-medium italic pr-2">
                 <p>રિપોર્ટર-જીતુ પરમાર માંગરોળ</p>
               </div>
             </div>
           </div>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="bg-slate-50 border-t">
         <Button 
           onClick={downloadTemplate} 
-          className="w-full bg-red-600 hover:bg-red-700 text-white"
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-medium"
         >
           <Download className="mr-2 h-4 w-4" /> Download Template
         </Button>
