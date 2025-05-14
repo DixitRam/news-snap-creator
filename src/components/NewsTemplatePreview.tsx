@@ -56,25 +56,29 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
         return {
           mainBg: "bg-yellow-50",
           borderColor: "border-yellow-500", 
-          headerBg: "from-amber-600 to-amber-700"
+          headerBg: "from-amber-600 to-amber-700",
+          stripColor: "bg-yellow-400"
         };
       case "announcement":
         return {
           mainBg: "bg-blue-50",
           borderColor: "border-blue-500",
-          headerBg: "from-blue-600 to-blue-700"
+          headerBg: "from-blue-600 to-blue-700",
+          stripColor: "bg-blue-400"
         };
       case "police":
         return {
           mainBg: "bg-gray-100",
           borderColor: "border-gray-700",
-          headerBg: "from-gray-700 to-gray-800"
+          headerBg: "from-gray-700 to-gray-800",
+          stripColor: "bg-gray-500"
         };
       default:
         return {
           mainBg: "bg-white",
           borderColor: "border-red-500",
-          headerBg: "from-red-600 to-red-700"
+          headerBg: "from-red-600 to-red-700",
+          stripColor: "bg-yellow-400"
         };
     }
   };
@@ -94,44 +98,42 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
             style={{ width: "800px", maxWidth: "100%", height: "auto" }}
           >
             {/* Header */}
-            <div className={`bg-gradient-to-r ${templateStyle.headerBg} text-white p-3 flex justify-between items-center shadow-md`}>
-              <div className="flex items-center gap-3">
-                <div className="bg-white rounded-full h-14 w-14 flex items-center justify-center overflow-hidden border-2 border-white shadow-md">
-                  <img 
-                    src="https://instagram.fjga1-1.fna.fbcdn.net/v/t51.2885-19/403908255_1677328472793460_3179481571731453175_n.jpg?stp=dst-jpg_s150x150_tt6&_nc_ht=instagram.fjga1-1.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2QHOXjOM5N0ksqePGC4OzpMZdz4X2p8qPU6ncYdt-OXY-6oZQO9vvnOEYsflMfmpJ4NzpSd9ytZhWs4gPSSOuMs7&_nc_gid=dF1ffrwOHYCMsdHYAEBFag&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfLyk0ytsD3sifFOGnsCZTf6EaURrDgVSVELxldQjbFLWA&oe=6829FC0D&_nc_sid=8b3546" 
-                    alt="Girnar Sandesh Logo" 
-                    className="h-12 w-12 object-cover"
-                  />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold drop-shadow-sm">સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર</div>
-                  <div className="text-3xl font-bold drop-shadow-sm tracking-wide">ગિરનાર સંદેશ</div>
-                </div>
-              </div>
-              <div className="text-sm font-medium drop-shadow-sm">
-                <div>RNI NO.GUJGUJ/2023/86250</div>
-                <div>Date:- {newsData.date}</div>
+            <div className="bg-amber-50 text-red-600 p-3 border-b-2 border-amber-900">
+              <div className="text-center">
+                <div className="text-xs font-medium mb-1">સોરઠ ગિરનાર થી પ્રસિદ્ધ થતું સમાચાર પત્ર</div>
+                <div className="text-5xl font-bold tracking-wide">ગિરનાર સંદેશ</div>
               </div>
             </div>
             
-            {/* Brown bar */}
+            {/* Brown header bar with info */}
             <div className="bg-amber-900 text-white py-1.5 px-3 text-sm flex justify-between items-center shadow-sm">
               <div className="font-medium">તંત્રી : મિલન એન.બારડ</div>
-              <div className="flex items-center gap-1">
-                <span className="text-base">📱</span> 8000124324
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1">
+                  <span className="text-base">📱</span> 8000124324
+                </span>
+                <span>
+                  RNI NO.GUJGUJ/2023/86250
+                </span>
+                <span>
+                  Date:- {newsData.date}
+                </span>
               </div>
             </div>
             
             {/* News Content */}
             <div className="p-4 md:p-5">
-              {/* Headline */}
+              {/* Headline with yellow strip below it */}
               {newsData.headline && (
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center border-b-2 pb-2 border-gray-300">{newsData.headline}</h2>
+                <div className="relative mb-6">
+                  <h2 className="text-2xl md:text-3xl font-bold mb-1 text-center">{newsData.headline}</h2>
+                  <div className={`absolute -bottom-3 left-0 right-0 h-8 ${templateStyle.stripColor} rounded-full transform rotate-[-1deg] -z-10`}></div>
+                </div>
               )}
               
               {/* Images */}
               {newsData.images.length > 0 && (
-                <div className={`grid gap-3 mb-4 ${
+                <div className={`grid gap-3 mb-4 mt-6 ${
                   newsData.images.length === 1 
                     ? 'grid-cols-1' 
                     : newsData.images.length === 2 
@@ -145,7 +147,7 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
                         newsData.images.length === 3 && index === 0 
                           ? 'col-span-2' 
                           : ''
-                      } h-52 overflow-hidden rounded-lg border-2 ${templateStyle.borderColor} shadow-md`}
+                      } h-52 overflow-hidden rounded-lg border shadow-md`}
                     >
                       <img 
                         src={img} 
@@ -159,12 +161,17 @@ const NewsTemplatePreview = ({ newsData }: NewsTemplatePreviewProps) => {
               
               {/* Subheading */}
               {newsData.subheading && (
-                <h3 className="text-xl font-semibold mb-3 underline decoration-2 decoration-gray-400">{newsData.subheading}</h3>
+                <div className="mt-4">
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-800">{newsData.subheading}</h3>
+                  <div className="h-0.5 w-1/4 bg-indigo-800 mb-3"></div>
+                </div>
               )}
               
               {/* Content */}
               {newsData.content && (
-                <p className="text-base leading-relaxed border-l-4 pl-3 py-1 border-gray-300">{newsData.content}</p>
+                <div className="mt-3">
+                  <p className="text-base leading-relaxed">{newsData.content}</p>
+                </div>
               )}
               
               {/* Footer */}
